@@ -1,9 +1,9 @@
 //===----------------------------------------------------------------------===//
 //
 // Copyright (c) 2017 Leonardo Faoro
-// Licensed under Apache License v2.0
+// Licensed under the BSD License
 //
-// See https://.../LICENSE.txt for license information
+// See https://github.com/lfaoro/focus/license.md for license information
 // See https://www.lfaoro.com for details about the author
 //
 //===----------------------------------------------------------------------===//

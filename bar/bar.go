@@ -1,3 +1,13 @@
+//===----------------------------------------------------------------------===//
+//
+// Copyright (c) 2017 Leonardo Faoro
+// Licensed under the BSD License
+//
+// See https://github.com/lfaoro/focus/license.md for license information
+// See https://www.lfaoro.com for details about the author
+//
+//===----------------------------------------------------------------------===//
+
 // Package bar provides a tool for creating custom progress bars
 // and display them on the screen.
 package bar
