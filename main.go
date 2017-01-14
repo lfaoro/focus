@@ -1,3 +1,13 @@
+//===----------------------------------------------------------------------===//
+//
+// Copyright (c) 2017 Leonardo Faoro
+// Licensed under Apache License v2.0
+//
+// See https://.../LICENSE.txt for license information
+// See https://www.lfaoro.com for details about the author
+//
+//===----------------------------------------------------------------------===//
+
 // Focus is an implementation of the Pomodoro technique
 package main
 
@@ -9,7 +19,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/lfaoro/pom/session"
+	"github.com/lfaoro/focus/session"
 )
 
 const (
@@ -66,12 +76,12 @@ func main() {
 	}
 
 	focus := session.New("Focus", focusTime, delay)
-	fmt.Println(focus.String())
+	// fmt.Println(focus.String())
 	focus.Start() // Blocking
 
-	focusBreak := session.New("Break", breakTime, delay)
-	fmt.Println(focusBreak.String())
-	focusBreak.Start() // Blocking
+	// focusBreak := session.New("Break", breakTime, delay)
+	// fmt.Println(focusBreak.String())
+	// focusBreak.Start() // Blocking
 
 }
 
