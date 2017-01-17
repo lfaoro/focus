@@ -3,12 +3,12 @@
 // Copyright (c) 2017 Leonardo Faoro
 // Licensed under the BSD License
 //
-// See https://github.com/lfaoro/focus/license.md for license information
-// See https://www.lfaoro.com for details about the author
+// See https://github.com/lfaoro/focus/blob/master/license.md for license
+// information
 //
 //===----------------------------------------------------------------------===//
 
-// Focus is an implementation of the Pomodoro technique
+// Focus is a CLI implementation of the Pomodoro technique.
 package main
 
 import (
@@ -41,6 +41,8 @@ var (
 	breakTime = 5 * time.Minute
 )
 
+// TODO(leo): have the makefile add copyright statements to every .go file
+// TODO(leo): add makefile with commit hash and build date
 // TODO(leo): add color with disable switch
 // TODO(leo): make the timer pausable by pressing p
 // TODO(leo): restart the timer by pressing r
