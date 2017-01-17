@@ -23,10 +23,15 @@ import (
 )
 
 const (
-	// Version of the program
+	// Version is the current release of the command-line app,
+	// we follow Semantic Versioning (http://semver.org).
 	Version = "1.0.0"
-	// Author of the program
+	// Author is the original author of the program, the one
+	// that wrote the first line of code.
 	Author = "Leonardo Faoro"
+	// Contributors is the list of all the individuals or organizations
+	// that contribute or have contributed code or ideas to the program.
+	Contributors = ""
 )
 
 var (
@@ -40,10 +45,10 @@ var (
 // TODO(leo): make the timer pausable by pressing p
 // TODO(leo): restart the timer by pressing r
 func main() {
-	flag.DurationVar(&delay, "d", (5 * time.Second), "Delay the start of the timer by n amount of seconds.")
+	flag.DurationVar(&delay, "d", 5*time.Second, "Delay the start of the timer by n amount of seconds.")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %v [flags...] [focus-time] [break-time]\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "Flags: \n")
+		fmt.Print("Flags: \n")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -52,8 +57,8 @@ func main() {
 	if *context != "personal" {
 		// save to DB with new key
 	}
-	// TODO(leo): Implement stats based on context
-	// e.g.: 100 focus hours dedicated to "Self Improvement"
+	//TODO(leo): Implement stats based on context
+	//e.g.: 100 focus hours dedicated to "Self Improvement"
 	// pom stats
 	// pom stats reset
 	if flag.Arg(0) == "stats" {
@@ -76,12 +81,12 @@ func main() {
 	}
 
 	focus := session.New("Focus", focusTime, delay)
-	// fmt.Println(focus.String())
+	//fmt.Println(focus.String())
 	focus.Start() // Blocking
 
-	// focusBreak := session.New("Break", breakTime, delay)
+	focusBreak := session.New("Break", breakTime, delay)
 	// fmt.Println(focusBreak.String())
-	// focusBreak.Start() // Blocking
+	focusBreak.Start() // Blocking
 
 }
 

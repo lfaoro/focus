@@ -4,7 +4,7 @@ GOINSTALL=$(GO) install
 GOCLEAN=$(GO) clean
 GOGET=$(GO) get
 
-EXENAME=pom
+EXENAME=focus
 
 export GOPATH=$(CURDIR)
 
