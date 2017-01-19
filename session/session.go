@@ -51,11 +51,11 @@ func (s *Session) Start() {
 	defer s.Stop()
 	go s.restart()
 
-	beep := sync.Once{}
-	beep.Do(func() { Ring(2) })
-
 	delay := sync.Once{}
 	delay.Do(func() { time.Sleep(s.delay) })
+
+	beep := sync.Once{}
+	beep.Do(func() { Ring(5) })
 
 	s.bar.Start(s.start)
 
@@ -96,8 +96,10 @@ func (s *Session) restart() {
 	}
 }
 
-func (s *Session) String() {
-	// make it print pretty
-	fmt.Sprintf("%s starts  %s", s.name, s.start)
+func (s *Session) String() string {
+	ss := fmt.Sprintf("%s starts %+10s\n", s.name, s.start.Format("15:04:05"))
+	sd := fmt.Sprintf("%s delay  %+10s\n", s.name, s.delay)
+	se := fmt.Sprintf("%s ends   %+10s\n", s.name, s.end.Format("15:04:05"))
 
+	return "\n" + ss + sd + se
 }

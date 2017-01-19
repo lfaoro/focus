@@ -83,11 +83,11 @@ func main() {
 	}
 
 	focus := session.New("Focus", focusTime, delay)
-	//fmt.Println(focus.String())
+	fmt.Print(focus.String())
 	focus.Start() // Blocking
 
 	focusBreak := session.New("Break", breakTime, delay)
-	// fmt.Println(focusBreak.String())
+	fmt.Print(focusBreak.String())
 	focusBreak.Start() // Blocking
 
 }

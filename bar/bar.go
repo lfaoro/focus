@@ -68,7 +68,7 @@ func (b *Bar) Progress(elapsed time.Duration) string {
 	bar := strings.Repeat("#", int(b.progress)) + strings.Repeat("-", dash)
 
 	elapsed = removePrecision(elapsed)
-	return fmt.Sprintf("\r%s progress   %s / %s  [%s] (%.f%%)",
+	return fmt.Sprintf("\r%s progress %s / %s  [%s] (%.f%%)",
 		b.name,
 		elapsed.String(),
 		b.duration.String(),
