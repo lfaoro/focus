@@ -26,6 +26,7 @@ type Bar struct {
 	pressure float64
 	progress float64
 	elapsed  float64
+	ticker   *time.Ticker
 }
 
 // New creates a new Bar
@@ -38,6 +39,20 @@ func New(name string, length float64, duration time.Duration) *Bar {
 	b.progress = 0.0
 	b.elapsed = 0.0
 	return b
+}
+
+func (b *Bar) Start(t time.Time) {
+	b.ticker = time.NewTicker(time.Second)
+	go func() {
+		for range b.ticker.C {
+			progress := time.Now().Sub(t)
+			fmt.Print(b.Progress(progress))
+		}
+	}()
+}
+
+func (b *Bar) Stop() {
+	b.ticker.Stop()
 }
 
 // Progress displays the current progress.

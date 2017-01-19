@@ -29,8 +29,8 @@ type Session struct {
 	start    time.Time
 	end      time.Time
 	C        chan os.Signal
-	ticker   *time.Ticker
 	timer    *time.Timer
+	bar      *bar.Bar
 }
 
 // New instances a new session.
@@ -42,6 +42,7 @@ func New(name string, duration time.Duration, delay time.Duration) *Session {
 	s.start = time.Now().Add(delay)
 	s.end = s.start.Add(s.duration)
 	s.C = make(chan os.Signal, 1)
+	s.bar = bar.New(s.name, 50, s.duration)
 	return s
 }
 
@@ -51,19 +52,12 @@ func (s *Session) Start() {
 	go s.restart()
 
 	beep := sync.Once{}
-	beep.Do(func() { print("\a") })
+	beep.Do(func() { Ring(2) })
 
 	delay := sync.Once{}
 	delay.Do(func() { time.Sleep(s.delay) })
 
-	s.ticker = time.NewTicker(time.Second)
-	b := bar.New(s.name, 50, s.duration)
-	go func() {
-		for range s.ticker.C {
-			progress := time.Now().Sub(s.start)
-			fmt.Print(b.Progress(progress))
-		}
-	}()
+	s.bar.Start(s.start)
 
 	s.timer = time.NewTimer(s.duration)
 	<-s.timer.C
@@ -71,13 +65,12 @@ func (s *Session) Start() {
 
 // Stop stops everything that could cause a panic during restart.
 func (s *Session) Stop() {
-	if s.ticker == nil || s.timer == nil {
+	if s.bar == nil || s.timer == nil {
 		os.Exit(1)
 	}
 
-	s.ticker.Stop()
+	s.bar.Stop()
 	s.timer.Stop()
-
 }
 
 func (s *Session) restart() {
@@ -105,4 +98,6 @@ func (s *Session) restart() {
 
 func (s *Session) String() {
 	// make it print pretty
+	fmt.Sprintf("%s starts  %s", s.name, s.start)
+
 }

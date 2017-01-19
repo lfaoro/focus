@@ -25,7 +25,7 @@ import (
 const (
 	// Version is the current release of the command-line app,
 	// we follow Semantic Versioning (http://semver.org).
-	Version = "1.0.0"
+	Version = "0.1.0"
 	// Author is the original author of the program, the one
 	// that wrote the first line of code.
 	Author = "Leonardo Faoro"
