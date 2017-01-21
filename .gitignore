@@ -4,4 +4,5 @@ focus
 focus.tar
 debug
 .DS_Store
+*.old
 emacs.reference
