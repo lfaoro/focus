@@ -100,13 +100,11 @@ func (s *Session) String() string {
 	ss := fmt.Sprintf("%s starts %+10s\n", s.name, s.start.Format("15:04:05"))
 	sd := fmt.Sprintf("%s delay  %+10s\n", s.name, timeFormat(s.delay))
 	se := fmt.Sprintf("%s ends   %+10s\n", s.name, s.end.Format("15:04:05"))
-
-	return "\n" + ss + sd + se
+	return "\n\n" + ss + sd + se
 }
 
 func timeFormat(d time.Duration) string {
 	t := time.Date(0, time.January, 0, int(d.Hours()), int(d.Minutes()),
 		int(d.Seconds()), 0, time.Local)
-
 	return t.Format("15:04:05")
 }

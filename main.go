@@ -25,7 +25,7 @@ import (
 const (
 	// Version is the current release of the command-line app,
 	// we follow Semantic Versioning (http://semver.org).
-	Version = "0.1.0"
+	Version = "1.0"
 	// Author is the original author of the program, the one
 	// that wrote the first line of code.
 	Author = "Leonardo Faoro"
@@ -35,8 +35,9 @@ const (
 )
 
 var (
+	//context   = flag.String("c", "personal", "Context towards which to gather statistics.")
+	version   = flag.Bool("v", false, "Shows the program version.")
 	delay     time.Duration
-	context   = flag.String("c", "personal", "Context towards which to gather statistics.")
 	focusTime = 20 * time.Minute
 	breakTime = 5 * time.Minute
 )
@@ -47,7 +48,7 @@ var (
 // TODO(leo): make the timer pausable by pressing p
 // TODO(leo): restart the timer by pressing r
 func main() {
-	flag.DurationVar(&delay, "d", 5*time.Second, "Delay the start of the timer by n amount of seconds.")
+	flag.DurationVar(&delay, "d", 5*time.Second, "Delay the start of the "+"timer by n amount of seconds.")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %v [flags...] [focus-time] [break-time]\n", os.Args[0])
 		fmt.Print("Flags: \n")
@@ -56,9 +57,14 @@ func main() {
 	}
 	flag.Parse()
 
-	if *context != "personal" {
-		// save to DB with new key
+	if *version {
+		fmt.Printf("\n%s version: %s\n", os.Args[0], Version)
+		os.Exit(0)
 	}
+
+	//if *context != "personal" {
+	//	// save to DB with new key
+	//}
 	//TODO(leo): Implement stats based on context
 	//e.g.: 100 focus hours dedicated to "Self Improvement"
 	// pom stats
