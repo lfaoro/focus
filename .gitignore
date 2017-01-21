@@ -1,5 +1,7 @@
-.vscode
-.DS_Store
-debug
-focus
 .idea
+.vscode
+focus
+focus.tar
+debug
+.DS_Store
+emacs.reference

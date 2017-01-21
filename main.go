@@ -23,9 +23,6 @@ import (
 )
 
 const (
-	// Version is the current release of the command-line app,
-	// we follow Semantic Versioning (http://semver.org).
-	Version = "1.0"
 	// Author is the original author of the program, the one
 	// that wrote the first line of code.
 	Author = "Leonardo Faoro"
@@ -35,15 +32,23 @@ const (
 )
 
 var (
+	// Version is the current release of the command-line app
+	Version   string // setup from Makefile
+	// Build is the build SHA (git rev-parse --short HEAD)
+	Build     string // setup from Makefile
+	// BuildTime (date +%F)
+	BuildTime string // setup from Makefile
+
+	version = flag.Bool("v", false, "Shows the program version.")
+
 	//context   = flag.String("c", "personal", "Context towards which to gather statistics.")
-	version   = flag.Bool("v", false, "Shows the program version.")
 	delay     time.Duration
 	focusTime = 20 * time.Minute
 	breakTime = 5 * time.Minute
 )
 
-// TODO(leo): have the makefile add copyright statements to every .go file
-// TODO(leo): add makefile with commit hash and build date
+// TODO(leo): have the Makefile add copyright statements to every .go file
+// TODO(leo): add Makefile with commit hash and build date
 // TODO(leo): add color with disable switch
 // TODO(leo): make the timer pausable by pressing p
 // TODO(leo): restart the timer by pressing r
@@ -58,7 +63,8 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Printf("\n%s version: %s\n", os.Args[0], Version)
+		fmt.Printf("\n%s - version: %s, build: %s, date: %s\n", os.Args[0],
+			Version, Build, BuildTime)
 		os.Exit(0)
 	}
 
