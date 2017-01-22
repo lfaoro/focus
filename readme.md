@@ -1,5 +1,8 @@
 # Focus
-> CLI implementation of the Pomodoro technique.
+> CLI implementation of the [Pomodoro][wiki] time-management technique.
+
+[wiki]: https://en.wikipedia.org/wiki/Pomodoro_Technique "Wiki: Pomodoro 
+Technique"
 
 ## Usage
 ```
@@ -18,6 +21,10 @@ Focus starts   02:49:43
 Focus delay    00:00:05
 Focus ends     03:09:43
 Focus progress 14s / 20m0s  [--------------------------------------------------] (1%)
+```
+## CTRL+C
+```
+Would you like to restart the timer?
 ```
 
 ## vFuture
