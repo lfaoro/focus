@@ -11,7 +11,7 @@ Flags:
 ```
 ## Example
 ```bash
-# delay 5sec / 20min session / 5min break
+# 5sec delay / 20min session / 5min break
 focus -d 5s 20 5
 
 Focus starts   02:49:43
@@ -21,7 +21,7 @@ Focus progress 14s / 20m0s  [--------------------------------------------------]
 ```
 
 ## vFuture
-- [ ] Context tracking (e.g.: "108 hours dedicated to \"Self Improvement\")
+- [ ] Context tracking (e.g.: "108 hours dedicated to "Self Improvement")
 - [ ] Customize alert bell (13 sounds)
 - [ ] Pause timer
 - [x] Restart timer
