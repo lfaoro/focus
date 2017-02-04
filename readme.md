@@ -33,3 +33,4 @@ Would you like to restart the timer?
 - [ ] Pause timer
 - [x] Restart timer
 - [ ] Anonymous Cloud sync of your stats
+- [ ] Encryption of the data sent over the network

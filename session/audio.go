@@ -11,11 +11,19 @@
 package session
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sort"
 )
+
+type sound struct {
+	completed  int
+	shortBreak int
+	longBreak  int
+}
 
 // The path to macOS sounds library
 const libSounds = "/System/Library/Sounds"
@@ -36,17 +44,26 @@ func Ring(sound int) {
 	cmd.Start()
 }
 
-func getSound(sound int) string {
+func getSound(s int) string {
+	if sounds != nil {
+		sort.Strings(sounds)
+		return sounds[s]
+	}
+
 	err := filepath.Walk(libSounds, walkFn)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// Discard the first slice element
 	sounds = sounds[1:]
-	if sound > len(sounds) {
+	if s > len(sounds) {
 		log.Fatal("sound not present")
 	}
-	return sounds[sound]
+
+	sort.Strings(sounds)
+	fmt.Println(sounds)
+
+	return sounds[s]
 }
 
 func walkFn(path string, info os.FileInfo, err error) error {

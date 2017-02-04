@@ -1,3 +1,10 @@
+# TODO(leo): have the Makefile add copyright statements to every .go file
+# grep for // Copyright (c) in *.go
+# if present, delete 9 lines from the file
+# inject copyright.txt into .go file
+# else inject
+# perform during build
+
 SOURCES := $(shell find . -name '*.go')
 
 BINARY=bin/focus
@@ -10,7 +17,12 @@ LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD} -X main.Buil
 
 .DEFAULT_GOAL: $(BINARY)
 $(BINARY): $(SOURCES)
-	go build ${LDFLAGS} -o ${BINARY} main.go
+	@echo "# Vetting..."
+	go vet ./...
+	@echo "# Formatting..."
+	go fmt ./...
+	@echo "# Building..."
+	go build -x ${LDFLAGS} -o ${BINARY} main.go
 
 .PHONY: install
 install:
@@ -26,4 +38,4 @@ v := $(shell echo "$v + 0.1" | bc)
 bump:
 	sed -i.old "s/^VERSION=.*/VERSION=${v}/" Makefile
 	# git tag v${v}
-	\t # git push --tags
+	# git push --tags

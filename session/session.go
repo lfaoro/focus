@@ -42,7 +42,7 @@ func New(name string, duration time.Duration, delay time.Duration) *Session {
 	s.start = time.Now().Add(delay)
 	s.end = s.start.Add(s.duration)
 	s.C = make(chan os.Signal, 1)
-	s.bar = bar.New(s.name, 50, s.duration)
+	s.bar = bar.New(s.name, 40, s.duration)
 	return s
 }
 
@@ -50,6 +50,8 @@ func New(name string, duration time.Duration, delay time.Duration) *Session {
 func (s *Session) Start() {
 	defer s.Stop()
 	go s.restart()
+
+	s.bumpSession()
 
 	delay := sync.Once{}
 	delay.Do(func() { time.Sleep(s.delay) })
@@ -66,6 +68,7 @@ func (s *Session) Start() {
 // Stop stops everything that could cause a panic during restart.
 func (s *Session) Stop() {
 	if s.bar == nil || s.timer == nil {
+		log.Print("Nothing to stop")
 		os.Exit(1)
 	}
 
@@ -75,11 +78,12 @@ func (s *Session) Stop() {
 
 func (s *Session) restart() {
 	signal.Notify(s.C, os.Interrupt, os.Kill)
-
 	<-s.C
+	s.Restart()
+}
 
+func (s *Session) Restart() {
 	s.Stop()
-
 	fmt.Print("\nWould you like to restart the timer? ")
 	var input string
 	_, err := fmt.Scan(&input)
@@ -107,4 +111,8 @@ func timeFormat(d time.Duration) string {
 	t := time.Date(0, time.January, 0, int(d.Hours()), int(d.Minutes()),
 		int(d.Seconds()), 0, time.Local)
 	return t.Format("15:04:05")
+}
+
+func (s *Session) bumpSession() {
+
 }

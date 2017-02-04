@@ -1,0 +1,9 @@
+//===----------------------------------------------------------------------===//
+//
+// Copyright 2017 Leonardo Faoro
+// Licensed under the BSD-3-Clause License
+//
+// See https://github.com/lfaoro/focus/blob/master/license.md for license
+// information
+//
+//===----------------------------------------------------------------------===//

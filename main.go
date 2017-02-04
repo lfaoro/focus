@@ -8,7 +8,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-// Focus is a CLI implementation of the Pomodoro technique.
+// Focus is a CLI implementation of the Pomodoro time-management technique.
+// see: https://en.wikipedia.org/wiki/Pomodoro_Technique
 package main
 
 import (
@@ -28,14 +29,14 @@ const (
 	Author = "Leonardo Faoro"
 	// Contributors is the list of all the individuals or organizations
 	// that contribute or have contributed code or ideas to the program.
-	Contributors = ""
+	Contributors = ``
 )
 
 var (
 	// Version is the current release of the command-line app
-	Version   string // setup from Makefile
+	Version string // setup from Makefile
 	// Build is the build SHA (git rev-parse --short HEAD)
-	Build     string // setup from Makefile
+	Build string // setup from Makefile
 	// BuildTime (date +%F)
 	BuildTime string // setup from Makefile
 
@@ -43,12 +44,13 @@ var (
 
 	//context   = flag.String("c", "personal", "Context towards which to gather statistics.")
 	delay     time.Duration
-	focusTime = 20 * time.Minute
+	focusTime = 25 * time.Minute
 	breakTime = 5 * time.Minute
 )
 
-// TODO(leo): have the Makefile add copyright statements to every .go file
-// TODO(leo): add Makefile with commit hash and build date
+// TODO(leo): add ticking sound
+// TODO(leo): add a testing few seconds timer
+// TODO(leo): remind the user to take a 30min break every 4 sessions.
 // TODO(leo): add color with disable switch
 // TODO(leo): make the timer pausable by pressing p
 // TODO(leo): restart the timer by pressing r
@@ -94,6 +96,8 @@ func main() {
 		break
 	}
 
+RESTART:
+
 	focus := session.New("Focus", focusTime, delay)
 	fmt.Print(focus.String())
 	focus.Start() // Blocking
@@ -101,6 +105,8 @@ func main() {
 	focusBreak := session.New("Break", breakTime, delay)
 	fmt.Print(focusBreak.String())
 	focusBreak.Start() // Blocking
+
+	goto RESTART
 
 }
 
